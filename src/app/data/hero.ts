@@ -8,6 +8,7 @@ export class Hero extends Serializable {
     dammage:number;
     healPoint:number;
     weaponId: string;
+    urlAvatar: string;
 
     getId(): string {
       return this.id;
@@ -34,6 +35,10 @@ export class Hero extends Serializable {
 
     getWeaponId(): string {
       return this.weaponId;
+    }
+
+    getUrlAvatar(): string {
+      return this.urlAvatar;
     }
 
 

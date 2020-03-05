@@ -4,12 +4,28 @@
 
   <div>
 
+    <img *ngIf="hero.urlAvatar" [src]="hero.urlAvatar" />
+
     <div>
       <label>Name: </label>
       <input [(ngModel)]="hero.name" placeholder="name" />
       <div [hidden]="hero.name" class="alert alert-danger">
         Name is required
       </div>
+    </div>
+
+    <div class="fileUpload btn btn-primary">
+      <span>Upload</span>
+      <input
+        id="uploadBtn"
+        type="file"
+        class="upload"
+        (change)="uploadFile($event.target.files)"
+      />
+    </div>
+
+    <div *ngIf="percentage | async as pct">
+      Progress: {{ pct | number }}%
     </div>
 
     <div>
