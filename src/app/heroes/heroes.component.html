@@ -1,0 +1,29 @@
+<h2>My Heroes</h2>
+<ul class="">
+
+  <div class="filters">
+    <span> filter by : </span>
+
+    <button (click)="filterBy('attack'); selectedProperty = 'attack'"> Attack </button>
+    <button (click)="filterBy('dodge'); selectedProperty = 'dodge'"> Dodge </button>
+    <button (click)="filterBy('dammage'); selectedProperty = 'dammage'"> Dammage </button>
+    <button (click)="filterBy('healPoint'); selectedProperty = 'healPoint'"> Heal Points </button>
+
+
+  </div>
+
+
+  <li *ngFor="let hero of heroes; let i = index" [attr.data-index]="i" [class.selected]="hero === selectedHero"
+    routerLink="/hero-detail/{{hero.id}}">
+    <span class="badge">{{i+1}}</span> {{hero.name}}
+    <div>
+      <p> attack {{hero.attack}} </p>
+      <p>dodge {{hero.dodge}} </p>
+      <p> dammage {{hero.dammage }} </p>
+      <p> healPoint {{hero.healPoint}} </p>
+    </div>
+  </li>
+
+
+
+</ul>

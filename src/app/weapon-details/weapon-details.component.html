@@ -1,0 +1,55 @@
+<div *ngIf="weapon">
+
+    <h2>{{weapon.name | uppercase}} Details</h2>
+  
+    <div>
+  
+      <div>
+        <label>Name: </label>
+        <input [(ngModel)]="weapon.name" placeholder="name" />
+        <div [hidden]="weapon.name" class="alert alert-danger">
+          Name is required
+        </div>
+      </div>
+  
+      <div>
+        <span>Attack: </span>
+        <button (click)="changeCharacteristic('attack', -1)" [disabled]="(weapon.attack <= -5) ? 'disabled': ''"> -1 </button>
+        <span> {{weapon.attack}} </span> 
+        <button (click)="changeCharacteristic('attack', 1)" [disabled]="(weapon.attack >= 5) || getPointsLeft() <= 0 ? 'disabled': ''"> +1 </button>
+      </div>
+  
+      <div>
+        <span>Dodge: </span>
+        <button (click)="changeCharacteristic('dodge', -1)" [disabled]="(weapon.dodge <= -5) ? 'disabled': ''"> -1 </button>
+        <span> {{weapon.dodge}} </span> 
+        <button (click)="changeCharacteristic('dodge', 1)" [disabled]="(weapon.dodge >= 5) || getPointsLeft() <= 0 ? 'disabled': ''"> +1 </button>  
+      </div>
+  
+      <div>
+        <span>Dammage: </span>
+        <button (click)="changeCharacteristic('dammage', -1)" [disabled]="(weapon.dammage <= -5) ? 'disabled': ''"> -1 </button>
+        <span> {{weapon.dammage}} </span> 
+        <button (click)="changeCharacteristic('dammage', 1)" [disabled]="(weapon.dammage >= 5) || getPointsLeft() <= 0 ? 'disabled': ''"> +1 </button>  
+      </div>
+  
+      <div>
+        <span>Heal point: </span>
+        <button (click)="changeCharacteristic('healPoint', -1)" [disabled]="(weapon.healPoint <= -5) ? 'disabled': ''"  > -1 </button>
+        <span> {{weapon.healPoint}} </span> 
+        <button (click)="changeCharacteristic('healPoint', 1)" [disabled]="(weapon.healPoint >= 5) || getPointsLeft() <= 0 ? 'disabled': ''"> +1 </button>  
+      </div>
+  
+  
+      <div>
+        <span> Points left for characteristics : {{getPointsLeft()}}</span>
+      </div>
+      <button (click)="goBack()">go back</button>
+  
+      <button (click)="saveWeaponCharacteristics()">Save</button>
+  
+    </div>
+  
+  
+  
+  </div>

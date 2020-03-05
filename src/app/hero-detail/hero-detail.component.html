@@ -1,0 +1,89 @@
+<div *ngIf="hero">
+
+  <h2>{{hero.name | uppercase}} Details</h2>
+
+  <div>
+
+    <div>
+      <label>Name: </label>
+      <input [(ngModel)]="hero.name" placeholder="name" />
+      <div [hidden]="hero.name" class="alert alert-danger">
+        Name is required
+      </div>
+    </div>
+
+    <div>
+      <span>Attack: </span>
+
+      <button (click)="changeCharacteristic('attack', -5)" [disabled]="(hero.attack <= 5)? 'disabled': ''"> -5 </button>
+      <button (click)="changeCharacteristic('attack', -1)" [disabled]="(hero.attack <= 1) ? 'disabled': ''"> -1 </button>
+      <span> {{hero.attack}} </span> 
+      <button (click)="changeCharacteristic('attack', 1)" [disabled]="(hero.attack >= 40) || getPointsLeft() <= 0 ? 'disabled': ''"> +1 </button>
+      <button (click)="changeCharacteristic('attack', 5)" [disabled]="(hero.attack >= 36) || getPointsLeft() < 5 ? 'disabled': ''"> +5 </button>
+    </div>
+
+    <div>
+      <span>Dodge: </span>
+
+      <button (click)="changeCharacteristic('dodge', -5)" [disabled]="(hero.dodge <= 5)? 'disabled': ''"> -5 </button>
+      <button (click)="changeCharacteristic('dodge', -1)" [disabled]="(hero.dodge <= 1) ? 'disabled': ''"> -1 </button>
+      <span> {{hero.dodge}} </span> 
+      <button (click)="changeCharacteristic('dodge', 1)" [disabled]="(hero.dodge >= 40) || getPointsLeft() <= 0 ? 'disabled': ''"> +1 </button>
+      <button (click)="changeCharacteristic('dodge', 5)" [disabled]="(hero.dodge >= 36) || getPointsLeft() < 5 ? 'disabled': ''"> +5 </button>
+
+    </div>
+
+    <div>
+      <span>Dammage: </span>
+
+      <button (click)="changeCharacteristic('dammage', -5)" [disabled]="(hero.dammage <= 5)? 'disabled': ''"> -5 </button>
+      <button (click)="changeCharacteristic('dammage', -1)" [disabled]="(hero.dammage <= 1) ? 'disabled': ''"> -1 </button>
+      <span> {{hero.dammage}} </span> 
+      <button (click)="changeCharacteristic('dammage', 1)" [disabled]="(hero.dammage >= 40) || getPointsLeft() <= 0 ? 'disabled': ''"> +1 </button>
+      <button (click)="changeCharacteristic('dammage', 5)" [disabled]="(hero.dammage >= 36) || getPointsLeft() < 5 ? 'disabled': ''"> +5 </button>
+
+    </div>
+
+    <div>
+      <span>Heal point: </span>
+      <button (click)="changeCharacteristic('healPoint', -5)" [disabled]="(hero.healPoint <= 5)? 'disabled': ''"> -5 </button>
+      <button (click)="changeCharacteristic('healPoint', -1)" [disabled]="(hero.healPoint <= 1) ? 'disabled': ''"  > -1 </button>
+      <span> {{hero.healPoint}} </span> 
+      <button (click)="changeCharacteristic('healPoint', 1)" [disabled]="(hero.healPoint >= 40) || getPointsLeft() <= 0 ? 'disabled': ''"> +1 </button>
+      <button (click)="changeCharacteristic('healPoint', 5)" [disabled]="(hero.healPoint >= 36) || getPointsLeft() < 5 ? 'disabled': ''"> +5 </button>
+    </div>
+
+    <div>
+      <span> Points left for characteristics : {{getPointsLeft()}}</span>
+    </div>
+
+    <div>
+      <p>Select a weapon for your hero</p>
+      <mat-form-field>
+        <mat-label>hero's weapon</mat-label>
+        <mat-select [(ngModel)]="hero.weaponId" selected="hero.weaponId">
+          <mat-option value=''>No weapon</mat-option>
+          <mat-option *ngFor="let weapon of weapons" [value]="weapon.id"  >
+            {{weapon.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="selectedWeapon" *ngIf="weapons && hero.weaponId">
+      <div> Attack : {{getSelectedWeapon().attack}} </div>
+      <div> Dodge : {{getSelectedWeapon().dodge}} </div>
+      <div> Dammage : {{getSelectedWeapon().dammage}}</div>
+      <div> HealPoint : {{getSelectedWeapon().healPoint}}</div>
+    </div>
+
+
+    <button (click)="goBack()">go back</button>
+
+    <button (click)="saveHeroCharacteristics()">Save</button>
+
+  </div>
+
+
+
+</div>
