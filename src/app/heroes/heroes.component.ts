@@ -15,7 +15,7 @@ export class HeroesComponent implements OnInit {
 
   heroes: Hero[];
 
-  selectedProperty: "";
+  selectedProperty = "";
   isSortingAsc =  true;
 
   constructor(private heroService: HeroService, db: AngularFirestore) {
