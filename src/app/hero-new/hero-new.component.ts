@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { WeaponService } from '../service/weapon/weapon.service';
 import { Weapon } from '../data/weapon';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -19,8 +20,9 @@ export class HeroNewComponent implements OnInit {
   @Input() weapons : Weapon[];
 
 
-  constructor(private heroService: HeroService, db: AngularFirestore, private weaponService: WeaponService
-    , private snackBar: MatSnackBar
+  constructor(private heroService: HeroService, db: AngularFirestore, private weaponService: WeaponService,
+    private location: Location,
+     private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -67,6 +69,10 @@ export class HeroNewComponent implements OnInit {
   openSnackBar(message, style) {
     this.snackBar.open(message, null, { panelClass: ['background-' + style, 'snackBar'], duration: 3000,
     });
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
   

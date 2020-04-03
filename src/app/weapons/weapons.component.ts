@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Weapon } from '../data/weapon';
 import { WeaponService } from '../service/weapon/weapon.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-weapons',
@@ -14,10 +13,11 @@ export class WeaponsComponent implements OnInit {
 
   weapons: Weapon[];
 
-  selectedProperty: "";
+  selectedProperty = "";
   isSortingAsc =  true;
 
-  constructor(private weaponService: WeaponService, db: AngularFirestore) {
+  constructor(private weaponService: WeaponService, db: AngularFirestore,    
+    ) {
   }
 
   getWeapons(): void {
@@ -47,5 +47,7 @@ export class WeaponsComponent implements OnInit {
     }
 
   }
+
+
 
 }

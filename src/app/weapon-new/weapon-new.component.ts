@@ -3,6 +3,7 @@ import { Weapon } from '../data/weapon';
 import { WeaponService } from '../service/weapon/weapon.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class WeaponNewComponent implements OnInit {
 
   @Input() weapon : Weapon;
 
-  constructor(private weaponService: WeaponService, db: AngularFirestore, private snackBar: MatSnackBar
+  constructor(private weaponService: WeaponService, db: AngularFirestore, private snackBar: MatSnackBar,  private location: Location
     ) { }
 
   ngOnInit() {
@@ -53,5 +54,10 @@ export class WeaponNewComponent implements OnInit {
   openSnackBar(message, style) {
       this.snackBar.open(message, null, {panelClass: [ 'background-' + style, 'snackBar'], duration: 3000});
   }
+
+  goBack(): void {
+    this.location.back();
+  }
+
 
 }

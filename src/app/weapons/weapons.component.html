@@ -17,7 +17,7 @@
 
 
 <ul class="weapons">
-  <li *ngFor="let weapon of weapons; let i = index" [attr.data-index]="i" [class.selected]="weapon === selectedWeapon" 
+  <li *ngFor="let weapon of weapons; let i = index" [attr.data-index]="i"
   routerLink="/weapon-detail/{{weapon.id}}">
       <span class="badge">{{i+1}}</span> {{weapon.name}}
   </li>
