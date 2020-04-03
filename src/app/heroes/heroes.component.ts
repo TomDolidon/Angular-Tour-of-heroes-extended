@@ -30,22 +30,20 @@ export class HeroesComponent implements OnInit {
     this.getHeroes();    
   } 
 
-  filterBy(property) {
-
+  sortBy(property) {
     if(this.selectedProperty == property) {
       this.isSortingAsc = !this.isSortingAsc;
     } 
 
-    if(this.isSortingAsc) {
+    if(this.isSortingAsc) {        
       this.heroes.sort((a,b) => {
         return a[property] - b[property];
       })
-    } else {
+    } else {        
       this.heroes.sort((a,b) => {
-        return a[property] + b[property];
+        return b[property] - a[property];
       })
     }
-
   }
 
 }

@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Component, OnInit, Input } from '@angular/core';
 import { Weapon } from '../data/weapon';
@@ -20,13 +20,13 @@ export class WeaponDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private weaponService: WeaponService,
     private location: Location,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router,
+
   ) {}
 
   ngOnInit(): void {
     this.getWeapon();
-
-   // this.pointsLeft = 
   }
   
   getWeapon(): void {
@@ -55,10 +55,7 @@ export class WeaponDetailsComponent implements OnInit {
         }
     } else {
       this.openSnackBar("you still have some points to divide up", 'negative')
-    }
-
-    //this.pointsLeft = 40 - (this.weapon.attack + this.weapon.dammage + this.weapon.dodge + this.weapon.healPoint);
-    
+    }    
   }
 
   getPointsLeft(){
@@ -67,9 +64,14 @@ export class WeaponDetailsComponent implements OnInit {
 
 
   openSnackBar(message, style) {
-      this.snackBar.open(message, null, {panelClass: [ 'background-' + style, 'snackBar']});
+      this.snackBar.open(message, null, {panelClass: [ 'background-' + style, 'snackBar'], duration: 3000});
   }
 
+  deleteHero(){
+    this.weaponService.deleteWeapon(this.weapon.id);
+    this.openSnackBar("Weapon deleted", 'positive')
+    this.router.navigateByUrl('/dashboard');
+    }
 }
 
 

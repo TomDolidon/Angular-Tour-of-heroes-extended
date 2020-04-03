@@ -27,8 +27,6 @@ export class WeaponsComponent implements OnInit {
 
   ngOnInit() {
     this.getWeapons();
-
-    console.log(this.weapons);
     
   } 
 
@@ -44,7 +42,7 @@ export class WeaponsComponent implements OnInit {
       })
     } else {
       this.weapons.sort((a,b) => {
-        return a[property] + b[property];
+        return b[property] - a[property];
       })
     }
 

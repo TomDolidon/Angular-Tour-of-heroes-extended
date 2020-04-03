@@ -51,7 +51,7 @@ export class WeaponNewComponent implements OnInit {
 
 
   openSnackBar(message, style) {
-      this.snackBar.open(message, null, {panelClass: [ 'background-' + style, 'snackBar']});
+      this.snackBar.open(message, null, {panelClass: [ 'background-' + style, 'snackBar'], duration: 3000});
   }
 
 }

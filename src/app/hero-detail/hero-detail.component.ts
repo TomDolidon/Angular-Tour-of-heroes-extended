@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Component, OnInit, Input } from '@angular/core';
 import { Hero } from '../data/hero';
@@ -39,7 +39,7 @@ export class HeroDetailComponent implements OnInit {
     private location: Location,
     private snackBar: MatSnackBar,
     private weaponService: WeaponService,
-
+    private router: Router,
     private storage: AngularFireStorage, private database: AngularFirestore
   ) {
 
@@ -82,7 +82,6 @@ export class HeroDetailComponent implements OnInit {
   }
 
   saveHeroCharacteristics() {
-    console.log(this.hero);
     
     if (this.getPointsLeft() == 0) {
         if(this.hero.getName() != '') {
@@ -102,7 +101,14 @@ export class HeroDetailComponent implements OnInit {
   }
 
   openSnackBar(message, style) {
-      this.snackBar.open(message, null, {panelClass: [ 'background-' + style, 'snackBar']});
+      this.snackBar.open(message, null, {panelClass: [ 'background-' + style, 'snackBar'], duration: 3000});
+  }
+
+  deleteHero(){
+      this.heroService.deleteHero(this.hero.id);
+      this.openSnackBar("Hero deleted", 'positive')
+      this.router.navigateByUrl('/dashboard');
+
   }
 
 
@@ -136,7 +142,6 @@ export class HeroDetailComponent implements OnInit {
   uploadFile(event: FileList) {
     
 
-    console.log("uploading");
     
  
     // The File object
@@ -174,7 +179,6 @@ export class HeroDetailComponent implements OnInit {
         // Get uploaded file storage path
         this.UploadedFileURL = fileRef.getDownloadURL();
 
-        console.log("finalize");
         
         this.UploadedFileURL.subscribe(resp=>{
           this.addImagetoDB({
@@ -183,13 +187,8 @@ export class HeroDetailComponent implements OnInit {
             size: this.fileSize
           });
 
-          console.log("resp");
-          console.log(resp);
-          
-          
+                
           this.hero.urlAvatar = resp;
-          console.log(this.hero);
-          
 
           this.isUploading = false;
           this.isUploaded = true;
@@ -211,7 +210,6 @@ export class HeroDetailComponent implements OnInit {
  
     //Set document id with value in database
     this.imageCollection.doc(id).set(image).then(resp => {
-      console.log(resp);
     }).catch(error => {
       console.log("error " + error);
     });

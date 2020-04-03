@@ -4,7 +4,18 @@
 
   <div>
 
-    <img *ngIf="hero.urlAvatar" [src]="hero.urlAvatar" />
+    <div
+    class="avatar"
+    *ngIf="hero.urlAvatar; else noAvatar"
+    [ngStyle]="{ 'background-image': 'url(' + hero.urlAvatar + ')'}">
+    </div>
+
+    <ng-template #noAvatar>
+        <div class="avatar">
+            <span>No avatar</span>
+        </div>    
+    </ng-template>
+
 
     <div>
       <label>Name: </label>
@@ -15,7 +26,7 @@
     </div>
 
     <div class="fileUpload btn btn-primary">
-      <span>Upload</span>
+      <span>Add avatar :</span>
       <input
         id="uploadBtn"
         type="file"
@@ -97,6 +108,9 @@
     <button (click)="goBack()">go back</button>
 
     <button (click)="saveHeroCharacteristics()">Save</button>
+
+
+    <button (click)="deleteHero()">Delete this hero</button>
 
   </div>
 
